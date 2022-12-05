@@ -1,6 +1,6 @@
 from django.contrib import admin
 from content.models import *
-
+admin.site.site_header = "Maraka Administration Site"
 admin.site.register(Banner)
 admin.site.register(FeacturedAd)
 admin.site.register(Visitor)
