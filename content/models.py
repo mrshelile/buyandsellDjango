@@ -10,11 +10,8 @@ class User(AbstractUser):
     
 class Product(models.Model):
     choices= [
-    ('FR', 'Freshman'),
-    ('SO', 'Sophomore'),
-    ('JR', 'Junior'),
-    ('SR', 'Senior'),
-    ('GR', 'Graduate'),
+    ('cars', 'cars'),
+    ('others', 'others'),
     ]
     created = models.DateTimeField(auto_now_add=True)
     owner= models.ForeignKey(User, on_delete=models.CASCADE)
