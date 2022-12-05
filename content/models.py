@@ -19,27 +19,27 @@ class Product(models.Model):
     description = models.TextField(max_length=1000)
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
-    identifier = models.UUIDField()
+    identifier = models.UUIDField(unique=True,auto_created=True)
     display = models.ImageField(upload_to ='uploads/')
     category = models.CharField(max_length=50,choices=choices)
        
 
 class Banner(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    url = models.CharField(max_length=1000,null=True)
-    owner = models.CharField(max_length=30,null=True)
+    link = models.CharField(max_length=1000,null=True)
+    owner = models.CharField(max_length=30)
     display = models.ImageField(upload_to ='uploads/')
     expire_date =  models.DateTimeField(auto_now_add=False)
     splashscreen =  models.BooleanField()
     home =  models.BooleanField()
-    universal = models.UUIDField()
+    universal = models.UUIDField(auto_created=True,unique=True)
 
-class FeacturedAd(models.Model):
+class FeaturedAd(models.Model):
     created = models.DateTimeField(auto_now_add=True)    
-    url = models.CharField(max_length=1000,null=True)
+    link = models.CharField(max_length=1000,null=True)
     display = models.ImageField(upload_to ='uploads/')
     expire_date =  models.DateTimeField(auto_now_add=False)
-    universal = models.UUIDField()
+    universal = models.UUIDField(auto_created=True,unique=True)
     
 class Visitor(models.Model):
     created = models.DateTimeField(auto_now_add=True)
