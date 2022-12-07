@@ -23,7 +23,7 @@ class Product(models.Model):
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
     identifier = models.UUIDField(unique=True,auto_created=True)
-    display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
+    display = models.ManyToManyField(MultiImage)
     category = models.CharField(max_length=50,choices=choices)
        
 
