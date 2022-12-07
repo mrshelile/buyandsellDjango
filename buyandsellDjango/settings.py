@@ -27,9 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
-
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 # Application definition
-
+# APPEND_SLASH = False 
+# SMART_APPEND_SLASH = True
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+     'django_filters',
     'content'
 ]
 
@@ -51,18 +53,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 REST_FRAMEWORK = {
+     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     # ]
         'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
         # 'core.rest.permissions.BaseModelPermissions'
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-          'rest_framework.authentication.SessionAuthentication',
-        ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #       'rest_framework.authentication.SessionAuthentication',
+    #     ],
 }
 ROOT_URLCONF = 'buyandsellDjango.urls'
 

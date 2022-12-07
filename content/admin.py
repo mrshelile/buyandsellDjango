@@ -6,4 +6,5 @@ admin.site.register(FeaturedAd)
 admin.site.register(Visitor)
 admin.site.register(User)
 admin.site.register(Product)
+admin.site.register(MultiImage)
 # Register your models here.

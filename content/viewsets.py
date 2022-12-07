@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 from content.serializers import *
 from rest_framework.mixins import CreateModelMixin
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
@@ -20,7 +22,10 @@ class FeaturedAdsViewSet(viewsets.ModelViewSet):
     
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer   
+    serializer_class = ProductSerializer 
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['name','category']
+      
     
       
           

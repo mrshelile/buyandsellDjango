@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+class MultiImage(models.Model):
+    image =models.ImageField(upload_to ='uploads/')
+
 class User(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
     otp = models.IntegerField(null=True)
@@ -20,7 +23,7 @@ class Product(models.Model):
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
     identifier = models.UUIDField(unique=True,auto_created=True)
-    display = models.ImageField(upload_to ='uploads/')
+    display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
     category = models.CharField(max_length=50,choices=choices)
        
 
@@ -37,6 +40,7 @@ class Banner(models.Model):
 class FeaturedAd(models.Model):
     created = models.DateTimeField(auto_now_add=True)    
     link = models.CharField(max_length=1000,null=True)
+    owner = models.CharField(max_length=30)
     display = models.ImageField(upload_to ='uploads/')
     expire_date =  models.DateTimeField(auto_now_add=False)
     universal = models.UUIDField(auto_created=True,unique=True)

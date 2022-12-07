@@ -14,19 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path,include,re_path
 from rest_framework import routers
 from content.viewsets import *
 from django.conf import settings
 from django.conf.urls.static import static
 
 
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'list_users', UserViewSet)
 router.register(r'auth_user', CreateUserView)
 router.register(r'banners', BannerViewSet)
-router.register(r'FeaturedAds', FeaturedAdsViewSet)
-router.register(r'Product', ProductViewSet)
+router.register(r'featured-ads', FeaturedAdsViewSet)
+router.register(r'product', ProductViewSet)
 
 
 urlpatterns = [

@@ -9,17 +9,17 @@ class UserSerializer(serializers.ModelSerializer):
 class BannerSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model = Banner
-        fields = ['url','created','owner','link','display','expire_date','splashscreen','home','universal']       
+        fields = ['id','url','created','owner','link','display','expire_date','splashscreen','home','universal']       
 
 class FeaturedAdsSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model = FeaturedAd
-        fields = ['url','created','link','display','expire_date','universal']          
+        fields = ['id','url','created','owner','link','display','expire_date','universal']          
         
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model = Product
-        fields = ['url','created','owner','name','description','price','expire_date','identifier','display','category']          
+        fields = ['id','url','created','owner','name','description','price','expire_date','identifier','display','category']          
         
 class UserAuthSerializer(serializers.ModelSerializer):
     class Meta:
