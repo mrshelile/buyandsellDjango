@@ -11,12 +11,12 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=30,null=True)
     phone1 = models.CharField(max_length=30,null=True)
     phone2 = models.CharField(max_length=30,null=True)
-    
-    def save(self, *args, **kwargs):
+    validated = models.BooleanField(default=False)
+    # def save(self, *args, **kwargs):
         # if not self.pk:
         #     token = Token.objects.create(user=self)
         #     print(token.key) 
-        super().save(*args, **kwargs)  
+        # super().save(*args, **kwargs)  
         # token = Token.objects.create(user=self)
         # print(token.key) 
         # print("done")

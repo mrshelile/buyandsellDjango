@@ -27,6 +27,7 @@ router.register(r'auth_user', CreateUserView)
 router.register(r'banners', BannerViewSet)
 router.register(r'featured-ads', FeaturedAdsViewSet)
 router.register(r'product', ProductViewSet)
+# router.register(r'user-product', UserProductViewset)
 
 
 urlpatterns = [
@@ -34,6 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 #    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
    path('auth/', include('rest_authtoken.urls')),
+   re_path('user-product/(?P<owner>.+)',UserProductViewset.as_view())
     # path('auth/', include('rest_authtoken.urls')),
     # path('api-auth/', include('rest_framework.urls'))
 ]
