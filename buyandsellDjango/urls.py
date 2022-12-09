@@ -19,7 +19,7 @@ from rest_framework import routers
 from content.viewsets import *
 from django.conf import settings
 from django.conf.urls.static import static
-
+# from rest_framework.authtoken import views
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'list_users', UserViewSet)
@@ -32,6 +32,9 @@ router.register(r'product', ProductViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
+#    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
+   path('auth/', include('rest_authtoken.urls')),
+    # path('auth/', include('rest_authtoken.urls')),
+    # path('api-auth/', include('rest_framework.urls'))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

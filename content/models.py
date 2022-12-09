@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from rest_framework.authtoken.models import Token
 
 class MultiImage(models.Model):
     image =models.ImageField(upload_to ='uploads/')
@@ -10,6 +11,24 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=30,null=True)
     phone1 = models.CharField(max_length=30,null=True)
     phone2 = models.CharField(max_length=30,null=True)
+    
+    def save(self, *args, **kwargs):
+        # if not self.pk:
+        #     token = Token.objects.create(user=self)
+        #     print(token.key) 
+        super().save(*args, **kwargs)  
+        # token = Token.objects.create(user=self)
+        # print(token.key) 
+        # print("done")
+    # def save(self, *args, **kwargs):
+    #     if not self.pk:
+    #         # This code only happens if the objects is
+    #         # not in the database yet. Otherwise it would
+    #         # have pk
+    #         pass
+    #     token = Token.objects.create(user=self)
+    #     print(token.key)
+    #     super(User, self).save(*args, **kwargs)
     
 class Product(models.Model):
     choices= [

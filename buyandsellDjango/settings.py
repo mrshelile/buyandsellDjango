@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
+USER_SERIALIZER="content.serializers.UserAuthSerializer"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+REGISTRATION_ENABLED = True
 # Application definition
 # APPEND_SLASH = False 
 # SMART_APPEND_SLASH = True
@@ -40,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
      'django_filters',
-    'content'
+    'content',
+    # 'rest_authtoken'
+    'rest_authtoken',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -54,6 +59,9 @@ MIDDLEWARE = [
 ]
 REST_FRAMEWORK = {
      'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    #  'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_authtoken.auth.AuthTokenAuthentication',
+    #    ),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     # 'DEFAULT_PERMISSION_CLASSES': [
@@ -66,6 +74,7 @@ REST_FRAMEWORK = {
     ],
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
     #       'rest_framework.authentication.SessionAuthentication',
+    #        'rest_framework.authentication.TokenAuthentication',
     #     ],
 }
 ROOT_URLCONF = 'buyandsellDjango.urls'

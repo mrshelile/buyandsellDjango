@@ -1,16 +1,18 @@
 from content.models import *
 from rest_framework import  serializers
 
-class MultiImageSerializer(serializers.HyperlinkedModelSerializer):
+class MultiImageSerializer(serializers.ModelSerializer):
     class Meta:
         model= MultiImage
-        fields=['id','url','image']
+        fields=['id','image']
+        
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
 
 class BannerSerializer(serializers.HyperlinkedModelSerializer):
+
      class Meta:
         model = Banner
         fields = ['id','url','created','owner','link','display','expire_date','splashscreen','home','universal']       
@@ -20,7 +22,9 @@ class FeaturedAdsSerializer(serializers.HyperlinkedModelSerializer):
         model = FeaturedAd
         fields = ['id','url','created','owner','link','display','expire_date','universal']          
         
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
+     display = MultiImageSerializer(many=True)
+     
      class Meta:
         model = Product
         fields = ['id','url','created','owner','name','description','price','expire_date','identifier','display','category']          
