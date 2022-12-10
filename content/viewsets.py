@@ -12,6 +12,8 @@ from django.conf import settings
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['email',]
 
 class CreateUserView(CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
@@ -55,7 +57,16 @@ class SendEmailViewset(APIView):
         )
         # print(request.data['test'])
         return Response({"message":"email is end"},status=status.HTTP_200_OK)   
+
+class OTPUpdateViewset(APIView):
     
-    
-      
-          
+    def put(self,request,format=None):
+        try:
+            user =User.objects.filter(email=request.data['email']).update(otp=request.data['otp'],is_reset_password=True)
+            return Response({"user is in reset mode"},status=status.HTTP_200_OK)
+        
+        except(Exception):
+            return Response({"message":"internal server error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class UpdatePasswordViewset(APIView):
+    pass      

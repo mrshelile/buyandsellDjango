@@ -32,7 +32,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 class UserAuthSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'password','validated', 'email', 'full_name','phone1','is_superuser','is_active')
+        fields = ('id', 'username', 'password','validated', 'otp','email', 'full_name','phone1','is_superuser','is_active')
         write_only_fields = ('password',)
         read_only_fields = ('id',)
 
@@ -41,6 +41,7 @@ class UserAuthSerializer(serializers.ModelSerializer):
             is_active=validated_data['is_active'],
             is_superuser=validated_data['is_superuser'],
             phone1=validated_data['phone1'],
+            otp=validated_data['otp'],
             validated=validated_data['validated'],
             username=validated_data['username'],
             email=validated_data['email'],
@@ -51,4 +52,4 @@ class UserAuthSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
 
-        return user        
+        return user   

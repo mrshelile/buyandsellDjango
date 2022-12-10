@@ -15,6 +15,7 @@ class User(AbstractUser):
     phone1 = models.CharField(max_length=30,null=True,default='')
     phone2 = models.CharField(max_length=30,null=True,default='')
     validated = models.BooleanField(default=False)
+    is_reset_password= models.BooleanField(default=False,verbose_name="Reset Password")
     # def save(self, *args, **kwargs):
         # if not self.pk:
         #     token = Token.objects.create(user=self)
