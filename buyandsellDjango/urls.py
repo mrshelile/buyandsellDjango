@@ -35,6 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 #    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
    path('auth/', include('rest_authtoken.urls')),
+   path('sendEmail/',SendEmailViewset.as_view()),
    re_path('user-product/(?P<owner>.+)',UserProductViewset.as_view())
     # path('auth/', include('rest_authtoken.urls')),
     # path('api-auth/', include('rest_framework.urls'))
