@@ -46,18 +46,20 @@ class UserProductViewset(generics.ListAPIView):
 class SendEmailViewset(APIView):
     
     def post(self,request):
-        email = request.data['email']
-        subject= request.data['subject']
-        body = request.data['body']
-       
-        send_mail(
-            subject,
-            body,
-            settings.EMAIL_HOST_USER,
-            [email]
-        )
-        # print(request.data['test'])
-        return Response({"message":"email is end"},status=status.HTTP_200_OK)   
+        try:
+            email = request.data['email']
+            subject= request.data['subject']
+            body = request.data['body']
+        
+            send_mail(
+                subject,
+                body,
+                settings.EMAIL_HOST_USER,
+                [email]
+            )
+            return Response({"message":"email is sent"},status=status.HTTP_200_OK)  
+        except(Exception):
+            return Response({"message":"failed to send email"},status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
 class OTPUpdateViewset(APIView):
     
@@ -73,12 +75,25 @@ class UpdatePasswordViewset(APIView):
     def put(self,request,format=None):
         try:
             user= User.objects.filter(username=request.data['email'])
-            # serializer= PasswordUpdateSerializer(user)
             
             if  user.values():
                 password_validation.validate_password(request.data['password'])
                 user.update(is_reset_password=False,password=make_password(request.data['password']))
-                return Response({"password updated"},status=status.HTTP_200_OK)
+                return Response({"message":"password updated"},status=status.HTTP_200_OK)
             raise Exception
         except(Exception):
-            return Response({},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"message":"failed to update password"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class ValidateAccByOTpViewset(APIView):
+    def put(self,request,format=None):
+        try:
+            user= User.objects.filter(username=request.data['email'],validated=False)
+            
+            if  user.values():
+                
+                user.update(validated=True)
+                return Response({"message":"account validated"},status=status.HTTP_200_OK)
+            raise Exception
+        except(Exception):
+            return Response({"message":"failed to validate account"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -34,7 +34,7 @@ class UserAuthSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'password','validated', 'otp','email', 'full_name','phone1','is_superuser','is_active')
         write_only_fields = ('password',)
-        read_only_fields = ('id','email')
+        read_only_fields = ('id',)
 
     
     def create(self, validated_data):
