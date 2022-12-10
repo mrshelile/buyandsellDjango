@@ -34,8 +34,9 @@ class UserAuthSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'password','validated', 'otp','email', 'full_name','phone1','is_superuser','is_active')
         write_only_fields = ('password',)
-        read_only_fields = ('id',)
+        read_only_fields = ('id','email')
 
+    
     def create(self, validated_data):
         user = User.objects.create(
             is_active=validated_data['is_active'],
@@ -53,3 +54,13 @@ class UserAuthSerializer(serializers.ModelSerializer):
         user.save()
 
         return user   
+
+class PasswordUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('password', 'otp','email','is_reset_password' )
+        write_only_fields = ('password','is_reset_password')
+        read_only_fields = ('id','email') 
+    
+    # def update(self, instance, validated_data):
+            

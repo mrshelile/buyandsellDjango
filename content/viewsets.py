@@ -8,7 +8,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.contrib.auth import password_validation
+from django.contrib.auth.hashers import make_password
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -69,4 +70,15 @@ class OTPUpdateViewset(APIView):
             return Response({"message":"internal server error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UpdatePasswordViewset(APIView):
-    pass      
+    def put(self,request,format=None):
+        try:
+            user= User.objects.filter(username=request.data['email'])
+            # serializer= PasswordUpdateSerializer(user)
+            
+            if  user.values():
+                password_validation.validate_password(request.data['password'])
+                user.update(is_reset_password=False,password=make_password(request.data['password']))
+                return Response({"password updated"},status=status.HTTP_200_OK)
+            raise Exception
+        except(Exception):
+            return Response({},status=status.HTTP_500_INTERNAL_SERVER_ERROR)

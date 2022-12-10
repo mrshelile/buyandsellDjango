@@ -37,6 +37,7 @@ urlpatterns = [
    path('auth/', include('rest_authtoken.urls')),
    path('sendEmail/',SendEmailViewset.as_view()),
    path('reset-password',OTPUpdateViewset.as_view()),
+   path('update-password',UpdatePasswordViewset.as_view()),
    re_path('user-product/(?P<owner>.+)',UserProductViewset.as_view())
     # path('auth/', include('rest_authtoken.urls')),
     # path('api-auth/', include('rest_framework.urls'))
