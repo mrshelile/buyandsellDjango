@@ -7,10 +7,10 @@ class MultiImage(models.Model):
 
 class User(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
-    otp = models.IntegerField(null=True)
-    full_name = models.CharField(max_length=30,null=True)
-    phone1 = models.CharField(max_length=30,null=True)
-    phone2 = models.CharField(max_length=30,null=True)
+    otp = models.IntegerField(null=True,default='0')
+    full_name = models.CharField(max_length=30,null=True,default='')
+    phone1 = models.CharField(max_length=30,null=True,default='')
+    phone2 = models.CharField(max_length=30,null=True,default='')
     validated = models.BooleanField(default=False)
     # def save(self, *args, **kwargs):
         # if not self.pk:
