@@ -14,7 +14,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    search_fields = ['email',]
+    search_fields = ['email','username']
 
 class CreateUserView(CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
@@ -78,7 +78,7 @@ class UpdatePasswordViewset(APIView):
             
             if  user.values():
                 password_validation.validate_password(request.data['password'])
-                user.update(is_reset_password=False,password=make_password(request.data['password']))
+                user.update(is_reset_password=False,password=make_password(request.data['password']),otp='')
                 return Response({"message":"password updated"},status=status.HTTP_200_OK)
             raise Exception
         except(Exception):
@@ -91,8 +91,7 @@ class ValidateAccByOTpViewset(APIView):
             user= User.objects.filter(username=request.data['email'],validated=False)
             
             if  user.values():
-                
-                user.update(validated=True)
+                user.update(validated=True,otp='')
                 return Response({"message":"account validated"},status=status.HTTP_200_OK)
             raise Exception
         except(Exception):

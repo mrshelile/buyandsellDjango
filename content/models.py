@@ -10,7 +10,7 @@ class MultiImage(models.Model):
     
 class User(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
-    otp = models.IntegerField(null=True,default='0')
+    otp = models.CharField(null=True,default='',max_length=200)
     full_name = models.CharField(max_length=30,null=True,default='')
     phone1 = models.CharField(max_length=30,null=True,default='')
     phone2 = models.CharField(max_length=30,null=True,default='')
@@ -24,15 +24,7 @@ class User(AbstractUser):
         # token = Token.objects.create(user=self)
         # print(token.key) 
         # print("done")
-    # def save(self, *args, **kwargs):
-    #     if not self.pk:
-    #         # This code only happens if the objects is
-    #         # not in the database yet. Otherwise it would
-    #         # have pk
-    #         pass
-    #     token = Token.objects.create(user=self)
-    #     print(token.key)
-    #     super(User, self).save(*args, **kwargs)
+
     
 class Product(models.Model):
     choices= [
