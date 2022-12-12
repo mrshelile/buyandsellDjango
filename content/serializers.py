@@ -1,6 +1,11 @@
 from content.models import *
 from rest_framework import  serializers
 
+class VisitorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Visitor
+        fields = '__all__'
+
 class MultiImageSerializer(serializers.ModelSerializer):
     class Meta:
         model= MultiImage

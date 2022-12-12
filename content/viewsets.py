@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import password_validation
 from django.contrib.auth.hashers import make_password
+
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -108,4 +109,6 @@ class ValidateAccByOTpViewset(APIView):
         except(Exception):
             return Response({"message":"failed to validate account"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# class UploadImages()
+class VisitorViewset(viewsets.ModelViewSet):
+    queryset = Visitor.objects.all()
+    serializer_class = VisitorSerializer
