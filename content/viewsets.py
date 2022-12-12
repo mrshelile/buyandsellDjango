@@ -112,3 +112,5 @@ class ValidateAccByOTpViewset(APIView):
 class VisitorViewset(viewsets.ModelViewSet):
     queryset = Visitor.objects.all()
     serializer_class = VisitorSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['ip_address_hash',]
