@@ -33,7 +33,16 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer 
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     search_fields = ['name','category',]
- 
+
+class ProductCreateViewset(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductCreateSerializer
+    
+class MuitiImageViewset(viewsets.ModelViewSet):
+    queryset = MultiImage.objects.all()
+    serializer_class = MulitImageSerializer
+    
+    
 class UserProductViewset(generics.ListAPIView):
     serializer_class= ProductSerializer
     
@@ -65,9 +74,11 @@ class OTPUpdateViewset(APIView):
     
     def put(self,request,format=None):
         try:
-            user =User.objects.filter(email=request.data['email']).update(otp=request.data['otp'],is_reset_password=True)
-            return Response({"user is in reset mode"},status=status.HTTP_200_OK)
-        
+            user =User.objects.filter(email=request.data['email'])
+            if user.values():
+                user.update(otp=request.data['otp'],is_reset_password=True)
+                return Response({"user is in reset mode"},status=status.HTTP_200_OK)
+            raise Exception
         except(Exception):
             return Response({"message":"internal server error"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -96,3 +107,5 @@ class ValidateAccByOTpViewset(APIView):
             raise Exception
         except(Exception):
             return Response({"message":"failed to validate account"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+# class UploadImages()

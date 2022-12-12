@@ -4,9 +4,9 @@ from rest_framework.authtoken.models import Token
 
 class MultiImage(models.Model):
     image =models.ImageField(upload_to ='uploads/')
-    
+    created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.image
+        return str(self.created)
     
 class User(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
@@ -42,7 +42,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50,choices=choices)
     
     def __str__(self):
-        return self.name
+        return str(self.name)
     
        
 

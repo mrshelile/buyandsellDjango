@@ -27,6 +27,8 @@ router.register(r'auth_user', CreateUserView)
 router.register(r'banners', BannerViewSet)
 router.register(r'featured-ads', FeaturedAdsViewSet)
 router.register(r'product', ProductViewSet)
+router.register(r'product-create', ProductCreateViewset)
+router.register(r'multi-image', MuitiImageViewset)
 # router.register(r'user-product', UserProductViewset)
 
 
@@ -39,7 +41,7 @@ urlpatterns = [
    path('reset-password',OTPUpdateViewset.as_view()),
    path('update-password',UpdatePasswordViewset.as_view()),
    path('validate-account',ValidateAccByOTpViewset.as_view()),
-   re_path('user-product/(?P<owner>.+)',UserProductViewset.as_view())
+   re_path('user-product/(?P<owner>.+)',UserProductViewset.as_view()),
     # path('auth/', include('rest_authtoken.urls')),
     # path('api-auth/', include('rest_framework.urls'))
 ]

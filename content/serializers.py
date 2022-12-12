@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+        # read_only_fields = ['url']
 
 class BannerSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -23,11 +24,19 @@ class FeaturedAdsSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id','url','created','owner','link','display','expire_date','universal']          
         
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
-     display = MultiImageSerializer(many=True)
-     
+     display = MultiImageSerializer(many=True,required=False)
+    #  owner= serializers.PrimaryKeyRelatedField(queryset= User.objects.all(),)
      class Meta:
         model = Product
         fields = ['id','url','created','owner','name','description','price','expire_date','identifier','display','category']          
+class ProductCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields='__all__'
+class MulitImageSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model=MultiImage
+        fields=['id','url','image','created']
         
 class UserAuthSerializer(serializers.ModelSerializer):
     class Meta:
