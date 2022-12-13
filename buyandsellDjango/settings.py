@@ -31,13 +31,13 @@ USER_SERIALIZER="content.serializers.UserAuthSerializer"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 REGISTRATION_ENABLED = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.maraka.co.ls'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = False
 EMAIL_USE_SSL: False
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'info@maraka.co.ls'
+EMAIL_HOST_PASSWORD = 'Buy@S311'
 
 # Application definition
 # APPEND_SLASH = False 

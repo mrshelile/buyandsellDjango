@@ -55,7 +55,19 @@ class UserProductViewset(generics.ListAPIView):
 
 class SendEmailViewset(APIView):
     
-    def post(self,request):
+    def post (self,request):
+        # email = request.data['email']
+        # subject= request.data['subject']
+        # body = request.data['body']
+        # # print(email)
+        # send_mail(
+        #     subject,
+        #     body,
+        #     settings.EMAIL_HOST_USER,
+        #     [email]
+            
+        # )
+        # return Response({"message":"email is sent"},status=status.HTTP_200_OK)  
         try:
             email = request.data['email']
             subject= request.data['subject']
@@ -65,11 +77,13 @@ class SendEmailViewset(APIView):
                 subject,
                 body,
                 settings.EMAIL_HOST_USER,
-                [email]
+                [email],
+                fail_silently=False,
             )
             return Response({"message":"email is sent"},status=status.HTTP_200_OK)  
         except(Exception):
-            return Response({"message":"failed to send email"},status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
+            
+            return Response({"message":"failed to send email",},status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
 class OTPUpdateViewset(APIView):
     
