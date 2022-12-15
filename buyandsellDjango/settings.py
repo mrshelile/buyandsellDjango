@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(778dn52h)fi-6@rprxpgbr@xk!m*5!il81zf!y0w5_swj@u!5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api"]
 AUTH_USER_MODEL = "content.User"
 USER_SERIALIZER="content.serializers.UserAuthSerializer"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
@@ -112,8 +112,12 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'maraka',
+        'USER': 'maraka',
+        'PASSWORD': 'Buy@S311',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -153,6 +157,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT =  BASE_DIR / 'static'
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 # Default primary key field type
