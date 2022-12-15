@@ -39,12 +39,11 @@ class Product(models.Model):
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
     identifier = models.UUIDField(unique=True,auto_created=True)
-    display = models.ManyToManyField(MultiImage)
+    display = models.ManyToManyField(MultiImage,)
     category = models.CharField(max_length=50,choices=choices)
     
     def __str__(self):
         return str(self.name)
-    
        
 
 class Banner(models.Model):
