@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-(778dn52h)fi-6@rprxpgbr@xk!m*5!il81zf!y0w5_swj@u!5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api"]
+# ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api",'maraka.co.ls',"www.maraka.co.ls","https://maraka.co.ls"]
+ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
 USER_SERIALIZER="content.serializers.UserAuthSerializer"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
@@ -52,8 +53,8 @@ INSTALLED_APPS = [
     'rest_framework',
      'django_filters',
     'content',
-    # 'rest_authtoken'
     'rest_authtoken',
+    # 'rest_authtoken',
     'rest_framework.authtoken'
 ]
 
