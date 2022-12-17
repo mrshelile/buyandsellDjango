@@ -10,10 +10,10 @@ class MultiImage(models.Model):
     
 class User(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
-    otp = models.CharField(null=True,default='',max_length=200)
-    full_name = models.CharField(max_length=30,null=True,default='')
-    phone1 = models.CharField(max_length=30,null=True,default='')
-    phone2 = models.CharField(max_length=30,null=True,default='')
+    otp = models.CharField(null=True,default='',max_length=2000)
+    full_name = models.CharField(max_length=2000,null=True,default='')
+    phone1 = models.CharField(max_length=2000,null=True,default='')
+    phone2 = models.CharField(max_length=2000,null=True,default='')
     validated = models.BooleanField(default=False)
     is_reset_password= models.BooleanField(default=False,verbose_name="Reset Password")
     email = models.EmailField(unique=True)
@@ -34,13 +34,13 @@ class Product(models.Model):
     ]
     created = models.DateTimeField(auto_now_add=True)
     owner= models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    description = models.TextField(max_length=1000)
+    name = models.CharField(max_length=2000)
+    description = models.TextField(max_length=2000)
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
     identifier = models.UUIDField(unique=True,auto_created=True)
     display = models.ManyToManyField(MultiImage,)
-    category = models.CharField(max_length=50,choices=choices)
+    category = models.CharField(max_length=2000,choices=choices)
     
     def __str__(self):
         return str(self.name)
@@ -48,8 +48,8 @@ class Product(models.Model):
 
 class Banner(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    link = models.CharField(max_length=1000,null=True)
-    owner = models.CharField(max_length=30)
+    link = models.CharField(max_length=2000,null=True)
+    owner = models.CharField(max_length=2000)
     display = models.ImageField(upload_to ='uploads/')
     expire_date =  models.DateTimeField(auto_now_add=False)
     splashscreen =  models.BooleanField()
@@ -61,8 +61,8 @@ class Banner(models.Model):
     
 class FeaturedAd(models.Model):
     created = models.DateTimeField(auto_now_add=True)    
-    link = models.CharField(max_length=1000,null=True)
-    owner = models.CharField(max_length=30)
+    link = models.CharField(max_length=2000,null=True)
+    owner = models.CharField(max_length=2000)
     display = models.ImageField(upload_to ='uploads/')
     expire_date =  models.DateTimeField(auto_now_add=False)
     universal = models.UUIDField(auto_created=True,unique=True)
@@ -73,7 +73,7 @@ class FeaturedAd(models.Model):
 class Visitor(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     universal = models.UUIDField() 
-    ip_address_hash =  models.CharField(max_length=100)
+    ip_address_hash =  models.CharField(max_length=2000)
     
     def __str__(self):
         return self.ip_address_hash
