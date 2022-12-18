@@ -9,7 +9,7 @@ class MultiImage(models.Model):
         return str(self.created)
 
 class User(AbstractUser):
-    # created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     otp = models.CharField(null=True,default='',max_length=2000)
     full_name = models.CharField(max_length=2000,null=True,default='')
     phone1 = models.CharField(max_length=2000,null=True,default='')
