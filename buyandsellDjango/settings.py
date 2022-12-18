@@ -114,19 +114,18 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 DATABASES = {
     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'marakaco_maraka',
-        'USER': 'marakaco_maraka_admin',
-        'PASSWORD': 'Buy@S311',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'maraka',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '5432',
-        # 'OPTIONS': {
-        # 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        # }
-
-
+        'PORT': '3306',
+        'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
+
 
 
 # Password validation
