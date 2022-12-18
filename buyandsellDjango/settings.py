@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
 USER_SERIALIZER="content.serializers.UserAuthSerializer"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
-REGISTRATION_ENABLED = True
+# REGISTRATION_ENABLED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.maraka.co.ls'
@@ -113,15 +113,15 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'marakaco_maraka',
-        'USER': 'marakaco_maraka',
+        'USER': 'marakaco_maraka_admin',
         'PASSWORD': 'Buy@S311',
         'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'PORT': '5432',
+        # 'OPTIONS': {
+        # 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        # }
 
     }
 }
