@@ -13,7 +13,7 @@ class User(AbstractUser):
     otp = models.CharField(null=True,default='',max_length=2000)
     full_name = models.CharField(max_length=2000,null=True,default='')
     phone1 = models.CharField(max_length=2000,null=True,default='')
-    phone2 = models.CharField(max_length=2000,null=True,default='')
+    phone2 = models.CharField(max_length=2000,null=True,default='',blank=True)
     validated = models.BooleanField(default=False)
     is_reset_password= models.BooleanField(default=False,verbose_name="Reset Password")
     email = models.EmailField(unique=True)
