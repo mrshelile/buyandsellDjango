@@ -10,7 +10,7 @@ class MultiImage(models.Model):
 
 class User(AbstractUser):
     created = models.DateTimeField(auto_now_add=True)
-    otp = models.CharField(null=True,default='',max_length=2000)
+    otp = models.CharField(null=True,default='',max_length=2000,blank=True)
     full_name = models.CharField(max_length=2000,null=True,default='')
     phone1 = models.CharField(max_length=2000,null=True,default='')
     phone2 = models.CharField(max_length=2000,null=True,default='',blank=True)
@@ -38,7 +38,7 @@ class Product(models.Model):
     description = models.TextField(max_length=2000)
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
-    identifier = models.UUIDField(unique=True,auto_created=True)
+    identifier = models.UUIDField(unique=True,auto_created=True,editable=False,blank=True)
     display = models.ManyToManyField(MultiImage,)
     category = models.CharField(max_length=2000,choices=choices)
     
@@ -54,7 +54,7 @@ class Banner(models.Model):
     expire_date =  models.DateTimeField(auto_now_add=False)
     splashscreen =  models.BooleanField()
     home =  models.BooleanField()
-    universal = models.UUIDField(auto_created=True,unique=True)
+    universal = models.UUIDField(auto_created=True,unique=True,editable=False,blank=True)
     
     def __str__(self):
         return self.owner
@@ -65,14 +65,14 @@ class FeaturedAd(models.Model):
     owner = models.CharField(max_length=2000)
     display = models.ImageField(upload_to ='uploads/')
     expire_date =  models.DateTimeField(auto_now_add=False)
-    universal = models.UUIDField(auto_created=True,unique=True)
+    universal = models.UUIDField(auto_created=True,unique=True,editable=False,blank=True)
     
     def __str__(self):
         return self.owner
     
 class Visitor(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    universal = models.UUIDField() 
+    universal = models.UUIDField(auto_created=True,unique=True,editable=False,blank=True) 
     ip_address_hash =  models.CharField(max_length=2000)
     
     def __str__(self):
