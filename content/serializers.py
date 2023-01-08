@@ -23,10 +23,20 @@ class BannerSerializer(serializers.HyperlinkedModelSerializer):
         model = Banner
         fields = ['id','url','created','owner','link','display','expire_date','splashscreen','home','universal']       
 
+class BannerCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banner
+        fields='__all__'        
+
 class FeaturedAdsSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model = FeaturedAd
-        fields = ['id','url','created','owner','link','display','expire_date','universal']          
+        fields = ['id','url','created','owner','link','display','expire_date','universal']    
+
+class FeaturedAdsCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeaturedAd
+        fields='__all__'           
         
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
      display = MultiImageSerializer(many=True,required=False)

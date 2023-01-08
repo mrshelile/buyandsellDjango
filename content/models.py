@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from rest_framework.authtoken.models import Token
+import uuid 
 
 class MultiImage(models.Model):
     image =models.ImageField(upload_to ='uploads/')
@@ -38,7 +39,7 @@ class Product(models.Model):
     description = models.TextField(max_length=2000)
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
-    identifier = models.UUIDField(unique=True,auto_created=True,editable=False,blank=True)
+    identifier = models.UUIDField(editable=False,default = uuid.uuid4,unique=True,)
     display = models.ManyToManyField(MultiImage,)
     category = models.CharField(max_length=2000,choices=choices)
     
@@ -47,14 +48,14 @@ class Product(models.Model):
        
 
 class Banner(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True,null=True)
     link = models.CharField(max_length=2000,null=True)
-    owner = models.CharField(max_length=2000)
-    display = models.ImageField(upload_to ='uploads/')
-    expire_date =  models.DateTimeField(auto_now_add=False)
-    splashscreen =  models.BooleanField()
-    home =  models.BooleanField()
-    universal = models.UUIDField(auto_created=True,unique=True,editable=False,blank=True)
+    owner = models.CharField(max_length=2000,null=True)
+    display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
+    expire_date =  models.DateTimeField(auto_now_add=False,null=True)
+    splashscreen =  models.BooleanField(default=True)
+    home =  models.BooleanField(default=True)
+    universal = models.UUIDField(editable=False,default = uuid.uuid4,unique=True)
     
     def __str__(self):
         return self.owner
@@ -63,16 +64,16 @@ class FeaturedAd(models.Model):
     created = models.DateTimeField(auto_now_add=True)    
     link = models.CharField(max_length=2000,null=True)
     owner = models.CharField(max_length=2000)
-    display = models.ImageField(upload_to ='uploads/')
+    display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
     expire_date =  models.DateTimeField(auto_now_add=False)
-    universal = models.UUIDField(auto_created=True,unique=True,editable=False,blank=True)
+    universal = models.UUIDField(editable=False,default = uuid.uuid4,unique=True)
     
     def __str__(self):
         return self.owner
     
 class Visitor(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    universal = models.UUIDField(auto_created=True,unique=True,editable=False,blank=True) 
+    universal = models.UUIDField(editable=False,default = uuid.uuid4,unique=True,) 
     ip_address_hash =  models.CharField(max_length=2000)
     
     def __str__(self):

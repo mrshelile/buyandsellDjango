@@ -23,11 +23,19 @@ class CreateUserView(CreateModelMixin, viewsets.GenericViewSet):
 
 class BannerViewSet(viewsets.ModelViewSet):
     queryset = Banner.objects.all()
-    serializer_class = BannerSerializer    
+    serializer_class = BannerSerializer  
+    
+class BannerCreateViewSet(viewsets.ModelViewSet):
+    queryset = Banner.objects.all()
+    serializer_class = BannerCreateSerializer
 
 class FeaturedAdsViewSet(viewsets.ModelViewSet):
     queryset = FeaturedAd.objects.all()
     serializer_class = FeaturedAdsSerializer 
+
+class FeaturedAdsCreateViewSet(viewsets.ModelViewSet):
+    queryset = FeaturedAd.objects.all()
+    serializer_class = FeaturedAdsCreateSerializer
     
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
