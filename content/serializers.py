@@ -38,12 +38,19 @@ class FeaturedAdsCreateSerializer(serializers.ModelSerializer):
         model = FeaturedAd
         fields='__all__'           
         
+class CarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Car
+        fields='__all__'  
+           
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
      display = MultiImageSerializer(many=True,required=False)
+     car = CarSerializer(many=False)
     #  owner= serializers.PrimaryKeyRelatedField(queryset= User.objects.all(),)
      class Meta:
         model = Product
-        fields = ['id','url','created','owner','name','description','price','expire_date','identifier','display','category']          
+        fields = ['id','url','created','car','owner','name','description','price','expire_date','identifier','display','category']          
+          
 class ProductCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product

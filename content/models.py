@@ -42,20 +42,21 @@ class Car(models.Model):
 class Product(models.Model):
     choices= [
     ('cars', 'cars'),
-    ('others', 'others'),
+    ('miscellaneous', 'miscellaneous'),
     ]
     created = models.DateTimeField(auto_now_add=True)
     owner= models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=2000)
-    description = models.TextField(max_length=2000)
+    name = models.CharField(max_length=2000,null=True,default=None,blank=True)
+    description = models.TextField(max_length=2000,null=True,default=None,blank=True)
     price =  models.IntegerField()
     expire_date = models.DateTimeField()
     identifier = models.UUIDField(editable=False,default = uuid.uuid4,unique=True,)
     display = models.ManyToManyField(MultiImage,)
     category = models.CharField(max_length=2000,choices=choices)
+    car = models.OneToOneField(Car, on_delete=models.CASCADE,null=True,default=None,blank=True)
     
     def __str__(self):
-        return str(self.name)
+        return  str(self.created)
        
 
 class Banner(models.Model):
