@@ -51,7 +51,10 @@ class MuitiImageViewset(viewsets.ModelViewSet):
     queryset = MultiImage.objects.all()
     serializer_class = MulitImageSerializer
     
-    
+class CarViewset(viewsets.ModelViewSet):
+    queryset = Car.objects.all()
+    serializer_class= CarSerializer    
+        
 class UserProductViewset(generics.ListAPIView):
     serializer_class= ProductSerializer
     
