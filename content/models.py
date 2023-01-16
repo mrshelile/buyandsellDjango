@@ -27,6 +27,17 @@ class User(AbstractUser):
         # print(token.key) 
         # print("done")
 
+
+class Car(models.Model):
+    model = models.CharField(max_length=2000)
+    year= models.IntegerField()
+    fuel= models.CharField(max_length=2000,verbose_name="Fuel Type")
+    make = models.CharField(max_length=2000)
+    kilos= models.CharField(max_length=2000)
+    transmission = models.CharField(max_length=2000)
+    
+    def __str__(self):
+            return str(self.year) +" " +self.model+ " " +self.make
     
 class Product(models.Model):
     choices= [
