@@ -30,6 +30,7 @@ router.register(r'product', ProductViewSet)
 router.register(r'product-create', ProductCreateViewset)
 router.register(r'multi-image', MuitiImageViewset)
 router.register(r'visitor', VisitorViewset)
+router.register(r'car', CarViewset)
 router.register(r'banners-create', BannerCreateViewSet)
 router.register(r'featured-ads-create', FeaturedAdsCreateViewSet)
 
