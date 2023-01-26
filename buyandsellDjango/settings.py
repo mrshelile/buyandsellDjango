@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(778dn52h)fi-6@rprxpgbr@xk!m*5!il81zf!y0w5_swj@u!5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api",'maraka.co.ls',"www.maraka.co.ls","https://maraka.co.ls"]
 ALLOWED_HOSTS = ["*"]

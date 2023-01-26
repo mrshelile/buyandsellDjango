@@ -61,7 +61,7 @@ class Product(models.Model):
 
 class Banner(models.Model):
     created = models.DateTimeField(auto_now_add=True,null=True)
-    link = models.CharField(max_length=2000,null=True)
+    link = models.CharField(max_length=2000,null=True,blank=True)
     owner = models.CharField(max_length=2000,null=True)
     display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
     expire_date =  models.DateTimeField(auto_now_add=False,null=True)
@@ -74,7 +74,7 @@ class Banner(models.Model):
     
 class FeaturedAd(models.Model):
     created = models.DateTimeField(auto_now_add=True)    
-    link = models.CharField(max_length=2000,null=True)
+    link = models.CharField(max_length=2000,null=True,blank=True)
     owner = models.CharField(max_length=2000)
     display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
     expire_date =  models.DateTimeField(auto_now_add=False)

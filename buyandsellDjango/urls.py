@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.handler404),
-    path('buyandsellDjango-api/', include('content.urls')),
+    path('buyandsellDjango-apis/', include('content.urls')),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
