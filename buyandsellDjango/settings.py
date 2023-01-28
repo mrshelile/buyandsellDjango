@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(778dn52h)fi-6@rprxpgbr@xk!m*5!il81zf!y0w5_swj@u!5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api",'maraka.co.ls',"www.maraka.co.ls","https://maraka.co.ls"]
 ALLOWED_HOSTS = ["*"]
@@ -166,6 +166,8 @@ STATIC_URL = 'static/'
 STATIC_ROOT =  BASE_DIR / 'static'
 MEDIA_URL = '/uploads/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
