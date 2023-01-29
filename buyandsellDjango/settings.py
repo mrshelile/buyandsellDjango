@@ -165,7 +165,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT =  BASE_DIR / 'static'
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_ROOT = '/home/marakaco/buyandsellDjango/uploads/'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type

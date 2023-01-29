@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 import uuid 
 
 class MultiImage(models.Model):
-    image =models.ImageField(upload_to ='uploads/')
+    image =models.ImageField(upload_to ='')
     created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return str(self.created)
