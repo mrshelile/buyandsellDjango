@@ -9,7 +9,7 @@ admin.site.register(Visitor)
 admin.site.register(Product)
 admin.site.register(MultiImage)
 admin.site.register(Car)
-# admin.site.register(User)
+admin.site.register(Viewer)
 
 # Register your models here.
 @admin.action(description='Send OTP')
