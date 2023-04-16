@@ -32,7 +32,8 @@ router.register(r'multi-image', MuitiImageViewset)
 router.register(r'visitor', VisitorViewset)
 router.register(r'car', CarViewset)
 router.register(r'banners-create', BannerCreateViewSet)
-router.register(r'featured-ads-create', FeaturedAdsCreateViewSet)
+router.register(r'featured-ads-create', FeaturedAdsCreateViewSet),
+router.register(r'product-viewer',ViewerViewSet)
 
 
 urlpatterns = [
