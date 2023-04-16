@@ -113,18 +113,11 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'marakaco_maraka',
-        'USER': 'marakaco_maraka',
-        'PASSWORD': 'Buy@S311',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 
