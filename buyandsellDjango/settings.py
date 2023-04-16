@@ -156,9 +156,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT =  '/home/marakaco/buyandsellDjango/static/'
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = '/home/marakaco/buyandsellDjango/uploads/'
+MEDIA_ROOT = BASE_DIR / 'uploads'
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
