@@ -95,7 +95,8 @@ class Visitor(models.Model):
 class Viewer(models.Model):
     veiwer_hash = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
-    universal = models.UUIDField()
+    universal = models.UUIDField(editable=False,default = uuid.uuid4,unique=True,) 
+    product= models.ForeignKey(Product,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.viewer_hash
