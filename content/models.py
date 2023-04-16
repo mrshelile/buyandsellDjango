@@ -90,5 +90,13 @@ class Visitor(models.Model):
     
     def __str__(self):
         return self.ip_address_hash
-    
+ 
+
+class Viewer(models.Model):
+    veiwer_hash = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+    universal = models.UUIDField()
+
+    def __str__(self):
+        return self.viewer_hash
 # Create your models here.

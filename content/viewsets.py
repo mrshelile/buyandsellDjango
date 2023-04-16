@@ -50,6 +50,13 @@ class ProductCreateViewset(viewsets.ModelViewSet):
 class MuitiImageViewset(viewsets.ModelViewSet):
     queryset = MultiImage.objects.all()
     serializer_class = MulitImageSerializer
+
+
+class ViewerViewSet(viewsets.ModelViewSet):
+    queryset = Viewer.objects.all()
+    serializer_class = ViewerSeriarializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['veiwer_hash',]
     
 class CarViewset(viewsets.ModelViewSet):
     queryset = Car.objects.all()

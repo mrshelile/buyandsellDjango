@@ -10,6 +10,12 @@ class MultiImageSerializer(serializers.ModelSerializer):
     class Meta:
         model= MultiImage
         fields=['id','image']
+ 
+class ViewerSeriarializer(serializers.ModelSerializer):
+        
+    class Meta:
+        model = Viewer
+        fields = '__all__'       
         
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
