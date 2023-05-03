@@ -17,6 +17,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # read_only_fields = ['url']
 
+class ViewerSeriarializer(serializers.ModelSerializer):
+        
+    class Meta:
+        model = Viewer
+        fields = '__all__'           
+
 class BannerSerializer(serializers.HyperlinkedModelSerializer):
 
      class Meta:

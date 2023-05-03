@@ -9,6 +9,7 @@ admin.site.register(Visitor)
 admin.site.register(Product)
 admin.site.register(MultiImage)
 admin.site.register(Car)
+admin.site.register(Viewer)
 # admin.site.register(User)
 
 # Register your models here.

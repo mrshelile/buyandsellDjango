@@ -63,7 +63,13 @@ class UserProductViewset(generics.ListAPIView):
         owner=self.kwargs['owner']
         queryset = Product.objects.filter(owner=owner)
         return queryset
-
+        
+class ViewerViewSet(viewsets.ModelViewSet):
+    queryset = Viewer.objects.all()
+    serializer_class = ViewerSeriarializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['veiwer_hash',]
+    
 class SendEmailViewset(APIView):
     
     def post (self,request):
