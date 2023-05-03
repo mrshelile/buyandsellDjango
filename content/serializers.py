@@ -50,12 +50,13 @@ class CarSerializer(serializers.ModelSerializer):
         fields='__all__'  
            
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+     viewers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
      display = MultiImageSerializer(many=True,required=False)
      car = CarSerializer(many=False)
     #  owner= serializers.PrimaryKeyRelatedField(queryset= User.objects.all(),)
      class Meta:
         model = Product
-        fields = ['id','url','created','car','owner','name','description','price','expire_date','identifier','display','category']          
+        fields = ['id','viewers','url','created','car','owner','name','description','price','expire_date','identifier','display','category']          
           
 class ProductCreateSerializer(serializers.ModelSerializer):
     class Meta:
