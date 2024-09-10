@@ -10,7 +10,13 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import password_validation
 from django.contrib.auth.hashers import make_password
+from django.utils import timezone
 
+class ServerTimeViewSet(viewsets.ViewSet):
+    def list(self, request):
+        current_time = timezone.now()
+        return Response({"server_time": current_time})
+        
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

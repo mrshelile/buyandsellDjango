@@ -29,10 +29,33 @@ DEBUG = False
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
 USER_SERIALIZER="content.serializers.UserAuthSerializer"
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
-CORS_ALLOW_ALL_ORIGINS = True
+# SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+# CORS_ALLOW_ALL_ORIGINS = True
 # REGISTRATION_ENABLED = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:5173",
+    "mail.maraka.co.ls",
+    "maraka.co.ls",
+    "online.maraka.co.ls",
+    'https://online.maraka.co.ls' ,
+    "http://localhost:4173"
 
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Content-Type',
+    'Authorization',
+]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.maraka.co.ls'
 EMAIL_PORT = 2525
@@ -56,12 +79,15 @@ INSTALLED_APPS = [
     'content',
     'rest_authtoken',
     # 'rest_authtoken',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

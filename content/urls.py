@@ -34,7 +34,7 @@ router.register(r'car', CarViewset)
 router.register(r'banners-create', BannerCreateViewSet)
 router.register(r'featured-ads-create', FeaturedAdsCreateViewSet)
 router.register(r'product-viewer',ViewerViewSet)
-
+router.register(r'server-time', ServerTimeViewSet, basename='server-time')
 
 urlpatterns = [
     path('', include(router.urls)),
