@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
 USER_SERIALIZER="content.serializers.UserAuthSerializer"
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+CORS_ALLOW_ALL_ORIGINS = True
 # REGISTRATION_ENABLED = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
