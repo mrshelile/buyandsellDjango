@@ -23,46 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(778dn52h)fi-6@rprxpgbr@xk!m*5!il81zf!y0w5_swj@u!5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api",'maraka.co.ls',"www.maraka.co.ls","https://maraka.co.ls"]
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = "content.User"
 USER_SERIALIZER="content.serializers.UserAuthSerializer"
-# SECURE_CROSS_ORIGIN_OPENER_POLICY = None
-# CORS_ALLOW_ALL_ORIGINS = True
-# REGISTRATION_ENABLED = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://localhost:5173",
-    "mail.maraka.co.ls",
-    "maraka.co.ls",
-    "online.maraka.co.ls",
-    'https://online.maraka.co.ls' ,
-    "http://localhost:4173"
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+REGISTRATION_ENABLED = True
 
-]
-
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS',
-]
-
-CORS_ALLOW_HEADERS = [
-    'Content-Type',
-    'Authorization',
-]
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.maraka.co.ls'
-EMAIL_PORT = 2525
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL: False
-EMAIL_HOST_USER = 'info@maraka.co.ls'
-EMAIL_HOST_PASSWORD = 'Buy@S311'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Application definition
 # APPEND_SLASH = False 
@@ -77,17 +52,14 @@ INSTALLED_APPS = [
     'rest_framework',
      'django_filters',
     'content',
+    # 'rest_authtoken'
     'rest_authtoken',
-    # 'rest_authtoken',
-    'rest_framework.authtoken',
-    'corsheaders'
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
-    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -140,19 +112,10 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'marakaco_maraka',
-        'USER': 'marakaco_maraka',
-        'PASSWORD': 'Buy@S311',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 # Password validation
@@ -190,11 +153,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT =  '/home/marakaco/buyandsellDjango/static/'
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = '/home/marakaco/buyandsellDjango/uploads/'
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
+MEDIA_ROOT = BASE_DIR / 'uploads'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

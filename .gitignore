@@ -1,0 +1,45 @@
+# Python virtual environments
+venv/
+env/
+*/venv/
+*/env/
+
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+
+# Django migrations
+*/migrations/
+
+# Database files
+*.sqlite3
+
+# macOS files
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# Environment variables
+.env
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# pytest cache
+.pytest_cache/
