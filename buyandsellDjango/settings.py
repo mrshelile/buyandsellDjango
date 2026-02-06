@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(778dn52h)fi-6@rprxpgbr@xk!m*5!il81zf!y0w5_swj@u!5'
-
+SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# SECURITY
+
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # ALLOWED_HOSTS = ["https://maraka.co.ls/buyandsellDjango-api","maraka.co.ls/buyandsellDjango-api","www.maraka.co.ls/buyandsellDjango-api",'maraka.co.ls',"www.maraka.co.ls","https://maraka.co.ls"]
 ALLOWED_HOSTS = ["*"]
@@ -37,8 +44,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "mail.maraka.co.ls",
     "maraka.co.ls",
-    "online.maraka.co.ls",
-    'https://online.maraka.co.ls' ,
+    "api.maraka.co.ls",
+    'https://api.maraka.co.ls' ,
     "http://localhost:4173"
 
 ]
@@ -56,13 +63,14 @@ CORS_ALLOW_HEADERS = [
     'Content-Type',
     'Authorization',
 ]
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Email
 EMAIL_HOST = 'mail.maraka.co.ls'
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = False
-EMAIL_USE_SSL: False
-EMAIL_HOST_USER = 'info@maraka.co.ls'
-EMAIL_HOST_PASSWORD = 'Buy@S311'
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Application definition
 # APPEND_SLASH = False 
@@ -138,17 +146,17 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# Database
 DATABASES = {
     'default': {
-
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'marakaco_maraka',
-        'USER': 'marakaco_maraka',
-        'PASSWORD': 'Buy@S311',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
         'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         }
     }
 }
