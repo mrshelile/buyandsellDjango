@@ -42,9 +42,8 @@ USER_SERIALIZER="content.serializers.UserAuthSerializer"
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5173",
-    "mail.maraka.co.ls",
-    "maraka.co.ls",
-    "api.maraka.co.ls",
+    "https://mail.maraka.co.ls",
+    "https://maraka.co.ls",
     'https://api.maraka.co.ls' ,
     "http://localhost:4173"
 
@@ -149,7 +148,7 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),

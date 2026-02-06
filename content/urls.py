@@ -22,19 +22,20 @@ from django.conf.urls.static import static
 # from rest_framework.authtoken import views
 
 router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'list_users', UserViewSet)
-router.register(r'auth_user', CreateUserView)
-router.register(r'banners', BannerViewSet)
-router.register(r'featured-ads', FeaturedAdsViewSet)
-router.register(r'product', ProductViewSet)
-router.register(r'product-create', ProductCreateViewset)
-router.register(r'multi-image', MuitiImageViewset)
-router.register(r'visitor', VisitorViewset)
-router.register(r'car', CarViewset)
-router.register(r'banners-create', BannerCreateViewSet)
-router.register(r'featured-ads-create', FeaturedAdsCreateViewSet)
-router.register(r'product-viewer',ViewerViewSet)
-router.register(r'server-time', ServerTimeViewSet, basename='server-time')
+router.register(r'list_users', UserViewSet, basename='list_users')
+router.register(r'auth_user', CreateUserView, basename='auth_user')
+router.register(r'banners', BannerViewSet, basename='banners')
+router.register(r'featured-ads', FeaturedAdsViewSet, basename='featured_ads')
+router.register(r'product', ProductViewSet, basename='product')
+router.register(r'product-create', ProductCreateViewset, basename='product_create')
+router.register(r'multi-image', MuitiImageViewset, basename='multi_image')
+router.register(r'visitor', VisitorViewset, basename='visitor')
+router.register(r'car', CarViewset, basename='car')
+router.register(r'banners-create', BannerCreateViewSet, basename='banners_create')
+router.register(r'featured-ads-create', FeaturedAdsCreateViewSet, basename='featured_ads_create')
+router.register(r'product-viewer', ViewerViewSet, basename='product_viewer')
+router.register(r'server-time', ServerTimeViewSet, basename='server_time')
+
 
 urlpatterns = [
     path('', include(router.urls)),
