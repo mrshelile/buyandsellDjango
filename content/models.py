@@ -58,9 +58,27 @@ class Product(models.Model):
     def __str__(self):
         return  str(self.created)
        
+PROMOTION_TYPES = [
+    ('fresh_arrivals', 'Fresh Arrivals'),
+    ('monthend_specials', 'Monthend Specials'),
+    ('customizable', 'Customizable Promo'),
+]
 
 class Banner(models.Model):
+    promotion_types = PROMOTION_TYPES
+
+    class Meta:
+        permissions = [
+            ("manage_promotions", "Can manage promotions"),
+        ]
     created = models.DateTimeField(auto_now_add=True,null=True)
+    title = models.CharField(max_length=2000, null=True, blank=True, default='')
+    promotion_type = models.CharField(
+        max_length=2000,
+        blank=True,
+        default='',
+        help_text='Enter a custom promotion type or use one of the standard promo categories.',
+    )
     link = models.CharField(max_length=2000,null=True,blank=True)
     owner = models.CharField(max_length=2000,null=True)
     display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
@@ -71,9 +89,42 @@ class Banner(models.Model):
     
     def __str__(self):
         return self.owner
-    
+
+class Promotion(models.Model):
+    promotion_types = PROMOTION_TYPES
+
+    class Meta:
+        permissions = [
+            ("manage_promotions", "Can manage promotions"),
+        ]
+
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=2000, null=True, blank=True, default='')
+    promotion_type = models.CharField(
+        max_length=2000,
+        blank=True,
+        default='',
+        help_text='Enter a custom promotion type or use one of the standard promo categories.',
+    )
+    link = models.CharField(max_length=2000, null=True, blank=True)
+    owner = models.CharField(max_length=2000, null=True, blank=True)
+    display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
+    expire_date = models.DateTimeField(null=True, blank=True)
+    splashscreen = models.BooleanField(default=True)
+    home = models.BooleanField(default=True)
+    universal = models.UUIDField(editable=False, default=uuid.uuid4, unique=True)
+
+    def __str__(self):
+        return self.title or self.owner or str(self.universal)
+
 class FeaturedAd(models.Model):
-    created = models.DateTimeField(auto_now_add=True)    
+    class Meta:
+        permissions = [
+            ("manage_promotions", "Can manage promotions"),
+        ]
+
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=2000, null=True, blank=True, default='')
     link = models.CharField(max_length=2000,null=True,blank=True)
     owner = models.CharField(max_length=2000)
     display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)

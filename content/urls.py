@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path,include,re_path
 from rest_framework import routers
 from content.viewsets import *
+from content.views import PromotionFlyersView, LoginView
 from django.conf import settings
 from django.conf.urls.static import static
 # from rest_framework.authtoken import views
@@ -25,6 +26,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'list_users', UserViewSet)
 router.register(r'auth_user', CreateUserView)
 router.register(r'banners', BannerViewSet)
+router.register(r'promotions', PromotionViewSet)
 router.register(r'featured-ads', FeaturedAdsViewSet)
 router.register(r'product', ProductViewSet)
 router.register(r'product-create', ProductCreateViewset)
@@ -32,6 +34,7 @@ router.register(r'multi-image', MuitiImageViewset)
 router.register(r'visitor', VisitorViewset)
 router.register(r'car', CarViewset)
 router.register(r'banners-create', BannerCreateViewSet)
+router.register(r'promotions-create', PromotionCreateViewSet)
 router.register(r'featured-ads-create', FeaturedAdsCreateViewSet),
 router.register(r'product-viewer',ViewerViewSet)
 
@@ -40,12 +43,14 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
 #    path('api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
+   path('auth/login/', LoginView.as_view()),
    path('auth/', include('rest_authtoken.urls')),
    path('sendEmail/',SendEmailViewset.as_view()),
    path('reset-password',OTPUpdateViewset.as_view()),
    path('update-password',UpdatePasswordViewset.as_view()),
    path('validate-account',ValidateAccByOTpViewset.as_view()),
    re_path('user-product/(?P<owner>.+)',UserProductViewset.as_view()),
+   path('promotion-flyers', PromotionFlyersView.as_view(), name='promotion-flyers'),
     # path('auth/', include('rest_authtoken.urls')),
     # path('api-auth/', include('rest_framework.urls'))
 ]

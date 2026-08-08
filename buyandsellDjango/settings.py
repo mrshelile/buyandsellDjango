@@ -68,6 +68,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 REST_FRAMEWORK = {
+      'DEFAULT_AUTHENTICATION_CLASSES': [
+          'rest_authtoken.auth.AuthTokenAuthentication',
+          'rest_framework.authentication.SessionAuthentication',
+      ],
      'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     #  'DEFAULT_AUTHENTICATION_CLASSES': (
     #     'rest_authtoken.auth.AuthTokenAuthentication',
