@@ -95,6 +95,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 REST_FRAMEWORK = {
+      'DEFAULT_AUTHENTICATION_CLASSES': [
+          'rest_authtoken.auth.AuthTokenAuthentication',
+          'rest_framework.authentication.SessionAuthentication',
+      ],
      'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     #  'DEFAULT_AUTHENTICATION_CLASSES': (
     #     'rest_authtoken.auth.AuthTokenAuthentication',
@@ -140,18 +144,11 @@ WSGI_APPLICATION = 'buyandsellDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'marakaco_maraka',
-        'USER': 'marakaco_maraka',
-        'PASSWORD': 'Buy@S311',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 
@@ -190,9 +187,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT =  '/home/marakaco/buyandsellDjango/static/'
 MEDIA_URL = '/uploads/'
-MEDIA_ROOT = '/home/marakaco/buyandsellDjango/uploads/'
+MEDIA_ROOT = BASE_DIR / 'uploads'
+
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
