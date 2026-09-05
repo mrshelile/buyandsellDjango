@@ -109,6 +109,7 @@ class Promotion(models.Model):
     link = models.CharField(max_length=2000, null=True, blank=True)
     owner = models.CharField(max_length=2000, null=True, blank=True)
     display = models.ForeignKey(MultiImage, on_delete=models.CASCADE)
+    displays = models.ManyToManyField(MultiImage, related_name='promotions', blank=True)
     expire_date = models.DateTimeField(null=True, blank=True)
     splashscreen = models.BooleanField(default=True)
     home = models.BooleanField(default=True)

@@ -146,6 +146,27 @@ class PromotionAuthorizationTests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.json()['promotion_type'], 'fresh_arrivals')
 
+    def test_promotion_manager_can_create_with_multiple_images(self):
+        second_image = MultiImage.objects.create(
+            image=SimpleUploadedFile('second-promo.png', b'not-a-real-image')
+        )
+        self.client.force_authenticate(self.manager)
+        payload = self._promotion_payload()
+        payload['display'] = [self.image.id, second_image.id]
+
+        response = self.client.post(
+            '/buyandsellDjango-apis/promotions-create',
+            payload,
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        promotion = Promotion.objects.get(title='Fresh stock')
+        self.assertEqual(
+            set(promotion.displays.values_list('id', flat=True)),
+            {self.image.id, second_image.id},
+        )
+
     def test_promotions_create_endpoint_accepts_get(self):
         response = self.client.get('/buyandsellDjango-apis/promotions-create')
 

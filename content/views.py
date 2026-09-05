@@ -65,6 +65,13 @@ class PromotionFlyersView(APIView):
             image_url = ''
             if getattr(promotion.display, 'image', None):
                 image_url = request.build_absolute_uri(promotion.display.image.url)
+            image_urls = [
+                request.build_absolute_uri(image.image.url)
+                for image in promotion.displays.all()
+                if getattr(image, 'image', None)
+            ]
+            if not image_urls and image_url:
+                image_urls = [image_url]
 
             flyers.append({
                 'id': promotion.id,
@@ -73,6 +80,7 @@ class PromotionFlyersView(APIView):
                 'promotion_type': promotion.promotion_type,
                 'link': promotion.link or '',
                 'image_url': image_url,
+                'image_urls': image_urls,
                 'splashscreen': promotion.splashscreen,
                 'home': promotion.home,
                 'owner': promotion.owner or '',

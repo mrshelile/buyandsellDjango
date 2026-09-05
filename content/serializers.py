@@ -43,6 +43,15 @@ class BannerCreateSerializer(serializers.ModelSerializer):
             validated_data['owner'] = user.full_name or user.username
         return super().create(validated_data)
 
+class PromotionDisplayField(serializers.PrimaryKeyRelatedField):
+    def to_internal_value(self, data):
+        if isinstance(data, (list, tuple)):
+            return [
+                super(PromotionDisplayField, self).to_internal_value(value)
+                for value in data
+            ]
+        return [super(PromotionDisplayField, self).to_internal_value(data)]
+
 class PromotionSerializer(serializers.HyperlinkedModelSerializer):
     display_detail = MultiImageSerializer(source='display', read_only=True)
 
@@ -52,6 +61,8 @@ class PromotionSerializer(serializers.HyperlinkedModelSerializer):
         read_only_fields = ['id', 'url', 'created', 'universal']
 
 class PromotionCreateSerializer(serializers.ModelSerializer):
+    display = PromotionDisplayField(queryset=MultiImage.objects.all())
+
     class Meta:
         model = Promotion
         fields = ['id','created','title','promotion_type','owner','link','display','expire_date','splashscreen','home','universal']
@@ -62,7 +73,10 @@ class PromotionCreateSerializer(serializers.ModelSerializer):
         user = getattr(request, 'user', None)
         if user and user.is_authenticated:
             validated_data['owner'] = user.full_name or user.username
-        return super().create(validated_data)
+        images = validated_data.pop('display')
+        promotion = super().create({**validated_data, 'display': images[0]})
+        promotion.displays.set(images)
+        return promotion
 
 class FeaturedAdsSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
@@ -81,6 +95,9 @@ class PromotionFlyerSerializer(serializers.Serializer):
     promotion_type = serializers.CharField(allow_blank=True, required=False)
     link = serializers.CharField(allow_blank=True, required=False)
     image_url = serializers.CharField(allow_blank=True, required=False)
+    image_urls = serializers.ListField(
+        child=serializers.CharField(), required=False
+    )
     splashscreen = serializers.BooleanField(required=False)
     home = serializers.BooleanField(required=False)
     owner = serializers.CharField(allow_blank=True, required=False)
