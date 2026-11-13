@@ -10,7 +10,13 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import password_validation
 from django.contrib.auth.hashers import make_password
+from django.utils import timezone
 
+class ServerTimeViewSet(viewsets.ViewSet):
+    def list(self, request):
+        current_time = timezone.now()
+        return Response({"server_time": current_time})
+        
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -23,11 +29,19 @@ class CreateUserView(CreateModelMixin, viewsets.GenericViewSet):
 
 class BannerViewSet(viewsets.ModelViewSet):
     queryset = Banner.objects.all()
-    serializer_class = BannerSerializer    
+    serializer_class = BannerSerializer  
+    
+class BannerCreateViewSet(viewsets.ModelViewSet):
+    queryset = Banner.objects.all()
+    serializer_class = BannerCreateSerializer
 
 class FeaturedAdsViewSet(viewsets.ModelViewSet):
     queryset = FeaturedAd.objects.all()
     serializer_class = FeaturedAdsSerializer 
+
+class FeaturedAdsCreateViewSet(viewsets.ModelViewSet):
+    queryset = FeaturedAd.objects.all()
+    serializer_class = FeaturedAdsCreateSerializer
     
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -43,7 +57,10 @@ class MuitiImageViewset(viewsets.ModelViewSet):
     queryset = MultiImage.objects.all()
     serializer_class = MulitImageSerializer
     
-    
+class CarViewset(viewsets.ModelViewSet):
+    queryset = Car.objects.all()
+    serializer_class= CarSerializer    
+        
 class UserProductViewset(generics.ListAPIView):
     serializer_class= ProductSerializer
     
@@ -52,10 +69,28 @@ class UserProductViewset(generics.ListAPIView):
         owner=self.kwargs['owner']
         queryset = Product.objects.filter(owner=owner)
         return queryset
-
+        
+class ViewerViewSet(viewsets.ModelViewSet):
+    queryset = Viewer.objects.all()
+    serializer_class = ViewerSeriarializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['veiwer_hash',]
+    
 class SendEmailViewset(APIView):
     
-    def post(self,request):
+    def post (self,request):
+        # email = request.data['email']
+        # subject= request.data['subject']
+        # body = request.data['body']
+        # # print(email)
+        # send_mail(
+        #     subject,
+        #     body,
+        #     settings.EMAIL_HOST_USER,
+        #     [email]
+            
+        # )
+        # return Response({"message":"email is sent"},status=status.HTTP_200_OK)  
         try:
             email = request.data['email']
             subject= request.data['subject']
@@ -65,11 +100,13 @@ class SendEmailViewset(APIView):
                 subject,
                 body,
                 settings.EMAIL_HOST_USER,
-                [email]
+                [email],
+                fail_silently=False,
             )
             return Response({"message":"email is sent"},status=status.HTTP_200_OK)  
         except(Exception):
-            return Response({"message":"failed to send email"},status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
+            
+            return Response({"message":"failed to send email",},status=status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
 class OTPUpdateViewset(APIView):
     

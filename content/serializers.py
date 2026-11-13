@@ -17,23 +17,47 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # read_only_fields = ['url']
 
+class ViewerSeriarializer(serializers.ModelSerializer):
+        
+    class Meta:
+        model = Viewer
+        fields = '__all__'           
+
 class BannerSerializer(serializers.HyperlinkedModelSerializer):
 
      class Meta:
         model = Banner
         fields = ['id','url','created','owner','link','display','expire_date','splashscreen','home','universal']       
 
+class BannerCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banner
+        fields='__all__'        
+
 class FeaturedAdsSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model = FeaturedAd
-        fields = ['id','url','created','owner','link','display','expire_date','universal']          
+        fields = ['id','url','created','owner','link','display','expire_date','universal']    
+
+class FeaturedAdsCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FeaturedAd
+        fields='__all__'           
         
+class CarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= Car
+        fields='__all__'  
+           
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
+     viewers = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
      display = MultiImageSerializer(many=True,required=False)
+     car = CarSerializer(many=False)
     #  owner= serializers.PrimaryKeyRelatedField(queryset= User.objects.all(),)
      class Meta:
         model = Product
-        fields = ['id','url','created','owner','name','description','price','expire_date','identifier','display','category']          
+        fields = ['id','viewers','url','created','car','owner','name','description','price','expire_date','identifier','display','category']          
+          
 class ProductCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
