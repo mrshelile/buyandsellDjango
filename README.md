@@ -1,80 +1,153 @@
-# buyandsellDjango
+# Buy and Sell Django API
 
-pip install -r requirements.txt
+A Django-based backend project for a buy-and-sell marketplace application. The project provides a REST API for managing users, products, banners, featured ads, car listings, and related content. It uses Django REST Framework and SQLite for local development.
 
-\# BuyAndSellDjango Deployment Overview
+## Project Overview
 
+This application allows you to:
 
+- Register and authenticate users
+- Create and manage product listings
+- Upload multiple product images
+- Manage banners and featured advertisements
+- Handle user account validation and password reset flows
+- Expose REST API endpoints for frontend/mobile consumption
 
-\## Repository Information
+## Tech Stack
 
-\- \*\*Repository Path:\*\* `/home/marakac1/repositories/buyandsellDjango`
+- Python 3.x
+- Django 4.1.3
+- Django REST Framework
+- Django Filters
+- SQLite
+- Pillow for image uploads
 
-\- \*\*Remote URL:\*\* \[https://github.com/mrshelile/buyandsellDjango.git](https://github.com/mrshelile/buyandsellDjango.git)
+## Project Structure
 
-\- \*\*Current Branch:\*\* `production`
+- `buyandsellDjango/` – main Django project settings and routing
+- `content/` – app containing models, views, serializers, and API routes
+- `uploads/` – media files uploaded by users
+- `static/` – static files for the project
+- `db.sqlite3` – local SQLite database file
 
-\- \*\*HEAD Commit:\*\* `Prepare for deployment` (latest changes ready for deployment)
+## Prerequisites
 
+Before running the project, make sure you have:
 
+- Python installed on your machine
+- `pip` available
+- Access to a terminal or PowerShell
 
-\## Deployment Requirements
+## Installation on Windows
 
-1\. \*\*.cpanel.yml file\*\*
+1. Open PowerShell and navigate to the project folder:
 
-&nbsp;  - Located in the repository root.
+   ```powershell
+   cd "f:\Documents\Projects Worked On\BuyAndSell\buyandsellDjango"
+   ```
 
-&nbsp;  - Defines deployment tasks including virtual environment setup, package installation, database migrations, and static file collection.
+2. Create and activate a virtual environment:
 
+   ```powershell
+   python -m venv .env
+   .\.env\Scripts\Activate.ps1
+   ```
 
+3. Install the required packages:
 
-2\. \*\*Clean Git Status\*\*
+   ```powershell
+   pip install -r requirements.txt
+   ```
 
-&nbsp;  - No uncommitted changes.
+4. Apply database migrations:
 
-&nbsp;  - All deployable changes are committed to the `production` branch.
+   ```powershell
+   python manage.py migrate
+   ```
 
+5. Create a superuser account for the Django admin panel:
 
+   ```powershell
+   python manage.py createsuperuser
+   ```
 
-\## Deployment Steps (cPanel)
+## Running the Project
 
-1\. Navigate to \*\*Git™ Version Control → Pull or Deploy → Deploy\*\*.
+Start the development server:
 
-2\. cPanel reads `.cpanel.yml` and executes tasks:
+```powershell
+python manage.py runserver 0.0.0.0:8000
+```
 
-&nbsp;  - Create virtual environment
+The app will be available at:
 
-&nbsp;  - Install Python dependencies
+- Localhost: http://127.0.0.1:8000/
+- Local network access: http://<your-local-ip>:8000/
 
-&nbsp;  - Apply database migrations
+For example, if your laptop IP is `192.168.1.59`, you can access it using:
 
-&nbsp;  - Collect static files
+```text
+http://192.168.1.59:8000/
+```
 
+## API Routes
 
+The API is exposed under the `buyandsellDjango-apis/` base route. Some of the main endpoints include:
 
-\## Security Notes
+- `/buyandsellDjango-apis/` – base API routes
+- `/buyandsellDjango-apis/auth/` – authentication-related endpoints
+- `/buyandsellDjango-apis/sendEmail/` – email sending endpoint
+- `/buyandsellDjango-apis/reset-password` – password reset route
+- `/buyandsellDjango-apis/update-password` – password update route
+- `/buyandsellDjango-apis/validate-account` – account validation route
 
-\- GitGuardian has flagged hardcoded secrets in `buyandsellDjango/settings.py`.
+## Admin Panel
 
-\- Best practice: Move sensitive credentials to environment variables.
+You can access the Django admin panel at:
 
-\- Rotate exposed credentials (SMTP, database passwords) as needed.
+```text
+http://127.0.0.1:8000/admin/
+```
 
+Log in with the superuser credentials you created earlier.
 
+## Media Files
 
-\## Branch Management
+Uploaded images and files are stored in the `uploads/` directory. These are served through the project’s media URL configuration.
 
-\- `production` branch is ahead of `master` by 41 commits.
+## Common Development Commands
 
-\- For merging deployable changes to `master`:
+Run system checks:
 
-&nbsp; ```bash
+```powershell
+python manage.py check
+```
 
-&nbsp; git checkout master
+Run tests:
 
-&nbsp; git merge production
+```powershell
+python manage.py test
+```
 
-&nbsp; git push origin master
+Create new migrations after changing models:
 
+```powershell
+python manage.py makemigrations
+```
 
+## Troubleshooting
 
+If you encounter issues:
+
+- Make sure your virtual environment is activated
+- Confirm that all packages were installed successfully
+- Check that the correct Python interpreter is being used
+- If port `8000` is already in use, try another port such as:
+
+  ```powershell
+  python manage.py runserver 0.0.0.0:8080
+  ```
+
+## Notes
+
+This project is intended for local development and testing. For production deployment, you should configure a production-ready web server, environment variables, and secure settings.

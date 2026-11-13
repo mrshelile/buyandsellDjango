@@ -1,59 +1,35 @@
-# Python cache files
+# Python bytecode and caches
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Django stuff
-*.log
-*.pot
-*.pyc
-*.pyo
-*.pyd
-media/
-staticfiles/
-
-# Environment variables
-.env
-*.env
-
-# Virtual environment
+# Virtual environments
+.venv/
 venv/
 env/
-.venv/
+ENV/
+.env/
+.env
+.env.*
 
-# IDEs
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+# Django local data and generated files
+db.sqlite3
+media/
+uploads/
+tmp/
+*.log
+*.pot
 
-# MacOS
-.DS_Store
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Node (if you use npm for frontend)
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Coverage reports
+# Test and coverage artifacts
+.pytest_cache/
 .coverage
 htmlcov/
-coverage.xml
-*.cover
+.mypy_cache/
 
-# Pytest
-.cache
-.pytest_cache/
+# IDE/editor settings
+.vscode/
+.idea/
 
-# Celery
-celerybeat-schedule
-
-# Backup files
-*.bak
-*.swp
-*~
+# OS-specific files
+.DS_Store
+Thumbs.db
